@@ -1,0 +1,14 @@
+type: google.api.Service
+config_version: 3
+http:
+  rules:
+    - selector: protobuf.v1.VaultService.Ping
+      post: "/api/v1/vault-service/ping"
+      body: "*"
+    - selector: protobuf.v1.VaultService.CreateSecretsForTenant
+      post: "/api/v1/vault-service/secrets/{tenantName}"
+      body: "*"
+    - selector: protobuf.v1.VaultService.GetSecretsForTenant
+      get: "/api/v1/vault-service/secrets/{tenantName}"
+    - selector: protobuf.v1.VaultService.DeleteSecretsForTenant
+      delete: "/api/v1/vault-service/tenants/{tenantName}"

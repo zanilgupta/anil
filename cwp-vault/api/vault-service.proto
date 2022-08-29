@@ -1,0 +1,86 @@
+syntax = "proto3";
+package protobuf.v1;
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+
+option go_package = "cwp-vault/pkg/vault-service/models/protobuf";
+
+service VaultService {
+  // Ping Test
+  rpc Ping(PingRequest) returns (PingResponse);
+  // Create Secrets for a Tenant
+  rpc CreateSecretsForTenant(CreateSecretsForTenantRequest) returns (google.protobuf.Any);
+  // Get Secrets for a Tenant
+  rpc GetSecretsForTenant(GetSecretsForTenantRequest) returns (google.protobuf.Any);
+  // Delete secrets for a Tenant
+  rpc DeleteSecretsForTenant(DeleteSecretsForTenantRequest) returns (google.protobuf.Any);
+}
+
+// REST APIs
+
+message PingRequest {
+  string message = 1;
+}
+message PingResponse {
+  string message = 1;
+}
+
+message CreateSecretsForTenantRequest {
+  string namespace = 1;
+  string roleId = 2;
+  string secretId = 3;
+}
+
+message GetSecretsForTenantRequest {
+  string namespace = 1;
+  string roleId = 2;
+  string secretId = 3;
+}
+
+message DeleteSecretsForTenantRequest {
+  string namespace = 1;
+  string roleId = 2;
+  string secretId = 3;
+}
+
+message CreateSecretsForTenantResponse {
+  string tenantName = 1;
+}
+
+message GetSecretsForTenantsResponse {
+  repeated Secret secret = 1;
+}
+
+message DeleteSecretsForTenantResponse {
+  string tenantName = 1;
+}
+
+// Error Response Message
+message ErrorResponse {
+  // Error Status for Request
+  Status status = 1;
+  string message = 2;
+}
+
+message Secret {
+  string key = 1;
+  string value = 2;
+}
+
+/**
+ * enum Status shows status of Requests.
+*/
+enum Status {
+
+  // Unknown Status.
+  STATUS_UNKNOWN = 0;
+
+  // Task Failed
+  STATUS_FAILED = 0;
+
+  // Task Succeeded.
+  STATUS_SUCCESS = 1;
+
+  // Task sent to Tenant Agent is not supported.
+  STATUS_NOT_SUPPORTED = 2;
+}
