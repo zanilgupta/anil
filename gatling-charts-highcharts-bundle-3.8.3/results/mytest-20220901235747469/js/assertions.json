@@ -1,0 +1,10 @@
+{
+  "simulation": "computerdatabase.advanced.MyTest",
+  "simulationId": "mytest-20220901235747469",
+  "start": 1662076668386,
+  "description": "10k with wrong ns",
+  "scenarios": ["Users"],
+  "assertions": [
+
+  ]
+}

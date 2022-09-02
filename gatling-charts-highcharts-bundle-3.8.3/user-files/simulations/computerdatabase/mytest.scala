@@ -13,9 +13,9 @@ object GetKV {
   }
 val httpProtocol = http
     .baseUrl("https://us-zsense.zscwp.io:8300")
-    .header("X-Vault-Token", "hvs.CAESIBM8-NEuUt1hPF4Y6zGvk2kachus0facsRmq3_nJDvJ9GicKImh2cy5xdmlsbUcwNjhuV2tyVVdCanhFODVDdmYueXNxRFMQwyg")
+    .header("X-Vault-Token", "hvs.CAESIIbQaQiHcW2NrVfHe9nOow16A_En9pnaUfXp5X99P-OOGicKImh2cy5VUzl6ZVJ1RmZkcktGOWptcGJGRWlpaHMueXNxRFMQzyk")
   val users = scenario("Users").exec(GetKV.getKV)
 setUp(
-    users.inject(rampUsers(1500) during (5 seconds))
+    users.inject(rampUsers(50000) during (10 seconds))
   ).protocols(httpProtocol)
 }
